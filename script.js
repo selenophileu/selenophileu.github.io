@@ -1,24 +1,15 @@
 (() => {
   "use strict";
 
-  /* ---------- helpers ---------- */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
   const safeStorage = {
     get(key) {
-      try {
-        return localStorage.getItem(key);
-      } catch (e) {
-        return null;
-      }
+      try { return localStorage.getItem(key); } catch (e) { return null; }
     },
     set(key, value) {
-      try {
-        localStorage.setItem(key, value);
-      } catch (e) {
-        /* ignore (private mode, disabled storage, etc.) */
-      }
+      try { localStorage.setItem(key, value); } catch (e) { /* ignore */ }
     },
   };
 
@@ -26,31 +17,21 @@
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ---------- hero title reveal (wrap text so CSS can mask/slide it) ---------- */
-  $$(".hero h1 span").forEach((span) => {
-    const text = span.textContent;
-    span.textContent = "";
-    const inner = document.createElement("span");
-    inner.className = "line-inner";
-    inner.textContent = text;
-    span.appendChild(inner);
-  });
-
   /* ---------- mobile menu ---------- */
-  const menuButton = $(".menu-button");
+  const menuBtn = $(".menu-btn");
   const mobileMenu = $(".mobile-menu");
-  if (menuButton && mobileMenu) {
+  if (menuBtn && mobileMenu) {
     const closeMenu = () => {
       mobileMenu.classList.remove("is-open");
-      menuButton.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("menu-open");
+      menuBtn.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("is-locked");
     };
     const toggleMenu = () => {
       const isOpen = mobileMenu.classList.toggle("is-open");
-      menuButton.setAttribute("aria-expanded", String(isOpen));
-      document.body.classList.toggle("menu-open", isOpen);
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      document.body.classList.toggle("is-locked", isOpen);
     };
-    menuButton.addEventListener("click", toggleMenu);
+    menuBtn.addEventListener("click", toggleMenu);
     $$("a", mobileMenu).forEach((link) => link.addEventListener("click", closeMenu));
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) closeMenu();
@@ -58,25 +39,20 @@
   }
 
   /* ---------- language switcher (EN / IT) ---------- */
-  const langButtons = $$(".lang-button");
+  const langButtons = $$(".lang__btn");
   const translatable = $$("[data-en]");
   const languageBlocks = $$("[data-language]");
 
   function applyLanguage(lang) {
     document.documentElement.lang = lang;
 
-    langButtons.forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.lang === lang);
-    });
+    langButtons.forEach((btn) => btn.classList.toggle("is-active", btn.dataset.lang === lang));
 
     translatable.forEach((el) => {
       const value = lang === "it" ? el.dataset.it : el.dataset.en;
       if (value == null) return;
-      if (el.dataset.html === "true") {
-        el.innerHTML = value;
-      } else {
-        el.textContent = value;
-      }
+      if (el.dataset.html === "true") el.innerHTML = value;
+      else el.textContent = value;
     });
 
     languageBlocks.forEach((el) => {
@@ -86,9 +62,7 @@
     safeStorage.set("site-lang", lang);
   }
 
-  langButtons.forEach((btn) => {
-    btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
-  });
+  langButtons.forEach((btn) => btn.addEventListener("click", () => applyLanguage(btn.dataset.lang)));
 
   const preferredLang =
     safeStorage.get("site-lang") ||
@@ -96,136 +70,100 @@
   applyLanguage(preferredLang === "it" ? "it" : "en");
 
   /* ---------- lightbox gallery ---------- */
-  const photos = $$(".photo");
+  const frames = $$(".frame");
   const lightbox = $(".lightbox");
 
-  if (photos.length && lightbox) {
-    const lightboxImg = $("img", lightbox);
-    const counter = $(".lightbox-counter", lightbox);
-    const closeBtn = $(".lightbox-close", lightbox);
-    const prevBtn = $(".lightbox-prev", lightbox);
-    const nextBtn = $(".lightbox-next", lightbox);
-    let currentIndex = 0;
+  if (frames.length && lightbox) {
+    const stageImg = $(".lightbox__stage img", lightbox);
+    const counter = $(".lightbox__count", lightbox);
+    const closeBtn = $(".lightbox__close", lightbox);
+    const prevBtn = $(".lightbox__nav--prev", lightbox);
+    const nextBtn = $(".lightbox__nav--next", lightbox);
+    let index = 0;
     let lastFocused = null;
 
-    function renderSlide() {
-      const photo = photos[currentIndex];
-      const src = photo.dataset.image || $("img", photo).src;
-      const alt = $("img", photo).alt || "Alessia Laghi";
+    function render() {
+      const frame = frames[index];
+      const src = frame.dataset.full || $("img", frame).src;
+      const alt = $("img", frame).alt || "Alessia Laghi";
 
-      lightboxImg.classList.remove("is-loaded");
+      stageImg.classList.remove("is-loaded");
       const preload = new Image();
       preload.onload = () => {
-        lightboxImg.src = src;
-        lightboxImg.alt = alt;
-        requestAnimationFrame(() => lightboxImg.classList.add("is-loaded"));
+        stageImg.src = src;
+        stageImg.alt = alt;
+        requestAnimationFrame(() => stageImg.classList.add("is-loaded"));
       };
       preload.src = src;
 
-      if (counter) counter.textContent = `${currentIndex + 1} / ${photos.length}`;
+      if (counter) counter.textContent = `${index + 1} / ${frames.length}`;
     }
 
-    function openLightbox(index) {
-      currentIndex = index;
+    function open(i) {
+      index = i;
       lastFocused = document.activeElement;
-      renderSlide();
+      render();
       lightbox.classList.add("is-open");
       lightbox.setAttribute("aria-hidden", "false");
-      document.body.classList.add("lightbox-open");
+      document.body.classList.add("is-locked");
       closeBtn.focus();
     }
 
-    function closeLightbox() {
+    function close() {
       lightbox.classList.remove("is-open");
       lightbox.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("lightbox-open");
+      document.body.classList.remove("is-locked");
       if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
     }
 
-    function showNext() {
-      currentIndex = (currentIndex + 1) % photos.length;
-      renderSlide();
-    }
+    function next() { index = (index + 1) % frames.length; render(); }
+    function prev() { index = (index - 1 + frames.length) % frames.length; render(); }
 
-    function showPrev() {
-      currentIndex = (currentIndex - 1 + photos.length) % photos.length;
-      renderSlide();
-    }
+    frames.forEach((frame, i) => frame.addEventListener("click", () => open(i)));
+    if (closeBtn) closeBtn.addEventListener("click", close);
+    if (nextBtn) nextBtn.addEventListener("click", next);
+    if (prevBtn) prevBtn.addEventListener("click", prev);
 
-    photos.forEach((photo, index) => {
-      photo.addEventListener("click", () => openLightbox(index));
-    });
-
-    if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
-    if (nextBtn) nextBtn.addEventListener("click", showNext);
-    if (prevBtn) prevBtn.addEventListener("click", showPrev);
-
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) close(); });
 
     document.addEventListener("keydown", (e) => {
       if (!lightbox.classList.contains("is-open")) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") showNext();
-      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
     });
 
-    /* basic touch swipe support */
     let touchStartX = null;
-    lightbox.addEventListener(
-      "touchstart",
-      (e) => {
-        touchStartX = e.touches[0].clientX;
-      },
-      { passive: true }
-    );
-    lightbox.addEventListener(
-      "touchend",
-      (e) => {
-        if (touchStartX == null) return;
-        const delta = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(delta) > 40) {
-          delta < 0 ? showNext() : showPrev();
-        }
-        touchStartX = null;
-      },
-      { passive: true }
-    );
+    lightbox.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    lightbox.addEventListener("touchend", (e) => {
+      if (touchStartX == null) return;
+      const delta = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(delta) > 40) delta < 0 ? next() : prev();
+      touchStartX = null;
+    }, { passive: true });
   }
 
   /* ---------- gallery "view" cursor (pointer devices only) ---------- */
-  const gallery = $(".editorial-gallery");
-  if (gallery && window.matchMedia("(hover: hover)").matches) {
+  const grid = $(".work__grid");
+  if (grid && window.matchMedia("(hover: hover)").matches) {
     const cursor = document.createElement("div");
-    cursor.className = "gallery-cursor";
+    cursor.className = "cursor-chip";
     cursor.setAttribute("aria-hidden", "true");
     cursor.textContent = "View";
     document.body.appendChild(cursor);
 
-    gallery.addEventListener("mousemove", (e) => {
+    grid.addEventListener("mousemove", (e) => {
       cursor.style.left = `${e.clientX}px`;
       cursor.style.top = `${e.clientY}px`;
     });
-    gallery.addEventListener("mouseenter", () => cursor.classList.add("is-active"));
-    gallery.addEventListener("mouseleave", () => cursor.classList.remove("is-active"));
-  }
-
-  /* ---------- showreel marquee (built in JS so no HTML edits are needed) ---------- */
-  const showreelPlaceholder = $(".showreel-placeholder");
-  if (showreelPlaceholder) {
-    const marquee = document.createElement("div");
-    marquee.className = "showreel-marquee";
-    const track = document.createElement("div");
-    track.className = "showreel-marquee-track";
-    const words = ["Alessia Laghi", "Portrait", "Editorial", "Casting", "Alessia Laghi", "Portrait", "Editorial", "Casting"];
-    track.innerHTML = words.map((w) => `<span>${w}</span>`).join("");
-    marquee.appendChild(track);
-    showreelPlaceholder.after(marquee);
+    grid.addEventListener("mouseenter", () => cursor.classList.add("is-active"));
+    grid.addEventListener("mouseleave", () => cursor.classList.remove("is-active"));
   }
 
   /* ---------- scroll reveal ---------- */
-  const revealTargets = $$(".section-header, .about-lead, .about-copy, .profile-extra, .contact-intro, .hero-title");
+  const revealTargets = $$(
+    ".section__head, .about__lead, .about__copy, .chip, .contact__intro, .hero__body, .showreel__frame"
+  );
   revealTargets.forEach((el) => el.classList.add("reveal"));
 
   if ("IntersectionObserver" in window) {
