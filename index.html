@@ -1,12 +1,584 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+
+  <meta name="description"
+        content="Alessia Laghi — personal portfolio, photography, casting and creative projects.">
+
+  <title>Alessia Laghi — Portfolio</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <h1>Il mio portfolio</h1>
-  <p>Sito in costruzione.</p>
+
+<header class="site-header">
+
+  <a href="#top" class="logo">Alessia Laghi</a>
+
+  <nav class="desktop-nav" aria-label="Main navigation">
+    <a href="#work" data-en="Work" data-it="Portfolio">Work</a>
+    <a href="#about" data-en="About" data-it="Chi sono">About</a>
+    <a href="#profile" data-en="Profile" data-it="Profilo">Profile</a>
+    <a href="#showreel">Showreel</a>
+    <a href="#contact" data-en="Contact" data-it="Contatti">Contact</a>
+  </nav>
+
+  <div class="header-actions">
+
+    <div class="language-switcher" aria-label="Language">
+      <button class="lang-button active" data-lang="en">EN</button>
+      <span>/</span>
+      <button class="lang-button" data-lang="it">IT</button>
+    </div>
+
+    <button class="menu-button" aria-label="Open menu" aria-expanded="false">
+      Menu
+    </button>
+
+  </div>
+
+</header>
+
+
+<nav class="mobile-menu" aria-label="Mobile navigation">
+
+  <a href="#work" data-en="Work" data-it="Portfolio">Work</a>
+  <a href="#about" data-en="About" data-it="Chi sono">About</a>
+  <a href="#profile" data-en="Profile" data-it="Profilo">Profile</a>
+  <a href="#showreel">Showreel</a>
+  <a href="#contact" data-en="Contact" data-it="Contatti">Contact</a>
+
+</nav>
+
+
+<main id="top">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-title">
+      <p class="hero-kicker">Portfolio · 2026</p>
+
+      <h1>
+        <span>Alessia</span>
+        <span>Laghi</span>
+      </h1>
+
+      <p class="hero-location">
+        Cesenatico · Italy
+      </p>
+    </div>
+
+
+    <figure class="hero-photo">
+
+      <img
+        src="images/12.jpeg"
+        alt="Alessia Laghi"
+        fetchpriority="high"
+      >
+
+    </figure>
+
+
+    <a href="#work" class="hero-scroll">
+      <span data-en="Selected work" data-it="Portfolio">Selected work</span>
+      <span aria-hidden="true">↓</span>
+    </a>
+
+  </section>
+
+
+  <!-- WORK -->
+
+  <section id="work" class="section work">
+
+    <header class="section-header">
+
+      <span class="section-number">01</span>
+
+      <h2 data-en="Selected Work" data-it="Portfolio">
+        Selected Work
+      </h2>
+
+      <p
+        data-en="Portrait · Editorial · Creative"
+        data-it="Ritratto · Editoriale · Creatività"
+      >
+        Portrait · Editorial · Creative
+      </p>
+
+    </header>
+
+
+    <div class="editorial-gallery">
+
+      <!-- 4 -->
+      <button class="photo photo-a" data-image="images/4.jpeg">
+        <img src="images/4.jpeg" alt="Alessia Laghi portrait" loading="lazy">
+      </button>
+
+      <!-- 19 -->
+      <button class="photo photo-b" data-image="images/19.jpeg">
+        <img src="images/19.jpeg" alt="Alessia Laghi editorial portrait" loading="lazy">
+      </button>
+
+      <!-- 7 -->
+      <button class="photo photo-c" data-image="images/7.jpeg">
+        <img src="images/7.jpeg" alt="Black and white portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 3 -->
+      <button class="photo photo-d" data-image="images/3.jpeg">
+        <img src="images/3.jpeg" alt="Creative portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 15 -->
+      <button class="photo photo-e" data-image="images/15.jpeg">
+        <img src="images/15.jpeg" alt="Portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 21 -->
+      <button class="photo photo-f" data-image="images/21.jpeg">
+        <img src="images/21.jpeg" alt="Black and white photography of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 10 -->
+      <button class="photo photo-g" data-image="images/10.jpeg">
+        <img src="images/10.jpeg" alt="Studio portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 6 -->
+      <button class="photo photo-h" data-image="images/6.jpeg">
+        <img src="images/6.jpeg" alt="Artistic portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 23 -->
+      <button class="photo photo-i" data-image="images/23.jpeg">
+        <img src="images/23.jpeg" alt="Fashion portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 17 -->
+      <button class="photo photo-j" data-image="images/17.jpeg">
+        <img src="images/17.jpeg" alt="Editorial portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 1 -->
+      <button class="photo photo-k" data-image="images/1.jpeg">
+        <img src="images/1.jpeg" alt="Portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 20 -->
+      <button class="photo photo-l" data-image="images/20.jpeg">
+        <img src="images/20.jpeg" alt="Black and white portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 13 -->
+      <button class="photo photo-m" data-image="images/13.jpeg">
+        <img src="images/13.jpeg" alt="Editorial photography of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 25 -->
+      <button class="photo photo-n" data-image="images/25.jpeg">
+        <img src="images/25.jpeg" alt="Close portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 9 -->
+      <button class="photo photo-o" data-image="images/9.jpeg">
+        <img src="images/9.jpeg" alt="Portrait photography of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 18 -->
+      <button class="photo photo-p" data-image="images/18.jpeg">
+        <img src="images/18.jpeg" alt="Fashion photography of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 2 -->
+      <button class="photo photo-q" data-image="images/2.jpeg">
+        <img src="images/2.jpeg" alt="Black and white portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 22 -->
+      <button class="photo photo-r" data-image="images/22.jpeg">
+        <img src="images/22.jpeg" alt="Studio photography of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 14 -->
+      <button class="photo photo-s" data-image="images/14.jpeg">
+        <img src="images/14.jpeg" alt="Natural portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 24 -->
+      <button class="photo photo-t" data-image="images/24.jpeg">
+        <img src="images/24.jpeg" alt="Black and white portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 5 -->
+      <button class="photo photo-u" data-image="images/5.jpeg">
+        <img src="images/5.jpeg" alt="Portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 8 -->
+      <button class="photo photo-v" data-image="images/8.jpeg">
+        <img src="images/8.jpeg" alt="Black and white close-up of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 26 -->
+      <button class="photo photo-w" data-image="images/26.jpeg">
+        <img src="images/26.jpeg" alt="Fashion portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 11 -->
+      <button class="photo photo-x" data-image="images/11.jpeg">
+        <img src="images/11.jpeg" alt="Portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+      <!-- 16 -->
+      <button class="photo photo-y" data-image="images/16.jpeg">
+        <img src="images/16.jpeg" alt="Editorial portrait of Alessia Laghi" loading="lazy">
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section id="about" class="section about">
+
+    <header class="section-header">
+      <span class="section-number">02</span>
+
+      <h2 data-en="About" data-it="Chi sono">
+        About
+      </h2>
+    </header>
+
+
+    <div class="about-grid">
+
+      <p
+        class="about-lead"
+        data-en="Spontaneous, expressive and at ease in front of the camera."
+        data-it="Spontanea, espressiva e a mio agio davanti all'obiettivo."
+      >
+        Spontaneous, expressive and at ease in front of the camera.
+      </p>
+
+
+      <div class="about-copy">
+
+        <div data-language="en">
+
+          <p>
+            I have always had a natural connection with photography and
+            expressing myself in front of the camera. Today I cultivate
+            this passion alongside my main professional path, collaborating
+            with photographers and videomakers on portraits, editorial
+            shoots and creative projects.
+          </p>
+
+          <p>
+            I have also taken part in a television advertising production,
+            an experience that strengthened my interest in working on set
+            and exploring new opportunities in photography, advertising
+            and audiovisual productions.
+          </p>
+
+          <p>
+            Curious, energetic and comfortable working with others, I am
+            always interested in new castings and collaborations. Sport is
+            also an important part of my life: I play volleyball.
+          </p>
+
+        </div>
+
+
+        <div data-language="it" hidden>
+
+          <p>
+            Ho da sempre un rapporto naturale con la fotografia e con
+            l'espressione davanti all'obiettivo. Oggi coltivo questa
+            passione parallelamente al mio percorso professionale,
+            collaborando con fotografi e videomaker per ritratti, shooting
+            editoriali e progetti creativi.
+          </p>
+
+          <p>
+            Ho inoltre partecipato a una produzione pubblicitaria
+            televisiva, un'esperienza che ha rafforzato il mio interesse
+            per il lavoro sul set e la voglia di mettermi alla prova in
+            nuove esperienze legate alla fotografia, alla pubblicità e
+            alle produzioni audiovisive.
+          </p>
+
+          <p>
+            Sono una persona curiosa, energica e spontanea e mi interessa
+            ampliare le mie esperienze attraverso casting e nuove
+            collaborazioni. Lo sport è un'altra parte importante della
+            mia vita: gioco a pallavolo.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROFILE -->
+
+  <section id="profile" class="section profile">
+
+    <header class="section-header">
+
+      <span class="section-number">03</span>
+
+      <h2 data-en="Profile" data-it="Profilo">
+        Profile
+      </h2>
+
+      <p>Cesenatico · Italy</p>
+
+    </header>
+
+
+    <div class="profile-grid">
+
+      <dl class="profile-list">
+
+        <div>
+          <dt data-en="Height" data-it="Altezza">Height</dt>
+          <dd>170 cm</dd>
+        </div>
+
+        <div>
+          <dt data-en="Bust" data-it="Seno">Bust</dt>
+          <dd>86 cm</dd>
+        </div>
+
+        <div>
+          <dt data-en="Waist" data-it="Vita">Waist</dt>
+          <dd>70 cm</dd>
+        </div>
+
+        <div>
+          <dt data-en="Hips" data-it="Fianchi">Hips</dt>
+          <dd>80 cm</dd>
+        </div>
+
+        <div>
+          <dt data-en="Size" data-it="Taglia">Size</dt>
+          <dd>S</dd>
+        </div>
+
+        <div>
+          <dt data-en="Shoes" data-it="Scarpe">Shoes</dt>
+          <dd>EU 38</dd>
+        </div>
+
+        <div>
+          <dt data-en="Hair" data-it="Capelli">Hair</dt>
+          <dd data-en="Brown" data-it="Castani">Brown</dd>
+        </div>
+
+        <div>
+          <dt data-en="Eyes" data-it="Occhi">Eyes</dt>
+          <dd data-en="Brown" data-it="Castani">Brown</dd>
+        </div>
+
+        <div>
+          <dt data-en="Playing age" data-it="Età scenica">Playing age</dt>
+          <dd>20–30</dd>
+        </div>
+
+      </dl>
+
+
+      <div class="profile-extras">
+
+        <div class="profile-extra">
+
+          <span data-en="Languages" data-it="Lingue">
+            Languages
+          </span>
+
+          <p
+            data-en="Italian — Native<br>English — B2"
+            data-it="Italiano — Madrelingua<br>Inglese — B2"
+            data-html="true"
+          >
+            Italian — Native<br>
+            English — B2
+          </p>
+
+        </div>
+
+
+        <div class="profile-extra">
+
+          <span data-en="Skills" data-it="Competenze">
+            Skills
+          </span>
+
+          <p
+            data-en="Volleyball<br>Romagnolo accent on request"
+            data-it="Pallavolo<br>Cadenza romagnola su richiesta"
+            data-html="true"
+          >
+            Volleyball<br>
+            Romagnolo accent on request
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SHOWREEL -->
+
+  <section id="showreel" class="section showreel">
+
+    <header class="section-header light">
+
+      <span class="section-number">04</span>
+
+      <h2>Showreel</h2>
+
+    </header>
+
+
+    <div class="showreel-placeholder">
+
+      <span>Alessia Laghi</span>
+
+      <p
+        data-en="Showreel coming soon"
+        data-it="Showreel in fase di caricamento"
+      >
+        Showreel coming soon
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+
+  <section id="contact" class="section contact">
+
+    <span class="section-number">05</span>
+
+    <p
+      class="contact-intro"
+      data-en="Available for castings, shootings, advertising and creative projects."
+      data-it="Disponibile per casting, shooting, pubblicità e progetti creativi."
+    >
+      Available for castings, shootings, advertising and creative projects.
+    </p>
+
+
+    <a class="email-link" href="mailto:alessialaghi3@gmail.com">
+      alessialaghi3@gmail.com
+    </a>
+
+
+    <div class="social-links">
+
+      <a
+        href="https://www.instagram.com/selenophile.u?igsi=MTN3NGQ4dTI5bTlwcg=="
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Instagram ↗
+      </a>
+
+      <a
+        href="https://toadatabase.it/it/talent/alessia-25333/0196965a-0dd8-79bf-d736-e2fc0945a334/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Casting Profile ↗
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/alessialaghi3"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        LinkedIn ↗
+      </a>
+
+      <a
+        href="https://mattiabattistini.myportfolio.com/alessia"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Photo Portfolio ↗
+      </a>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <span>© <span id="year"></span> Alessia Laghi</span>
+
+  <a href="#top" data-en="Back to top ↑" data-it="Torna su ↑">
+    Back to top ↑
+  </a>
+
+</footer>
+
+
+<!-- LIGHTBOX -->
+
+<div
+  class="lightbox"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Photo viewer"
+>
+
+  <button class="lightbox-close" aria-label="Close">
+    Close
+  </button>
+
+  <button class="lightbox-prev" aria-label="Previous photo">
+    ←
+  </button>
+
+  <div class="lightbox-content">
+    <img src="" alt="Alessia Laghi">
+  </div>
+
+  <button class="lightbox-next" aria-label="Next photo">
+    →
+  </button>
+
+  <span class="lightbox-counter"></span>
+
+</div>
+
+
+<script src="script.js"></script>
+
 </body>
 </html>
