@@ -162,7 +162,7 @@
 
   /* ---------- scroll reveal ---------- */
   const revealTargets = $$(
-    ".section__head, .about__lead, .about__copy, .chip, .contact__intro, .hero__body, .showreel__frame"
+    ".section__head, .about__lead, .about__copy, .about__frame, .chip, .contact__intro, .hero__body, .showreel__frame"
   );
   revealTargets.forEach((el) => el.classList.add("reveal"));
 
