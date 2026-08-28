@@ -170,6 +170,29 @@
     }, { passive: true });
   }
 
+  /* ---------- showreel video (paused, full-width preview → real size on play) ---------- */
+  const showreelFrame = $(".showreel__frame");
+  const showreelVideo = $(".showreel__video");
+  const showreelPlay = $(".showreel__play");
+  if (showreelFrame && showreelVideo && showreelPlay) {
+    showreelVideo.addEventListener("loadedmetadata", () => {
+      if (showreelVideo.currentTime === 0) {
+        try { showreelVideo.currentTime = 0.01; } catch (e) { /* ignore */ }
+      }
+    });
+    showreelPlay.addEventListener("click", () => {
+      showreelFrame.classList.add("is-playing");
+      showreelVideo.controls = true;
+      showreelVideo.muted = false;
+      showreelVideo.play().catch(() => {});
+    });
+    showreelVideo.addEventListener("ended", () => {
+      showreelFrame.classList.remove("is-playing");
+      showreelVideo.controls = false;
+      showreelVideo.currentTime = 0;
+    });
+  }
+
   /* ---------- gallery "view" cursor (pointer devices only) ---------- */
   const mosaic = $(".mosaic");
   if (mosaic && window.matchMedia("(hover: hover)").matches) {
