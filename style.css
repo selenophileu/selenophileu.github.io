@@ -174,6 +174,20 @@ body > .grain { position: fixed; z-index: 90; opacity: 0.035; }
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: 50% 22%;
 }
+
+/* desktop: the video sizes itself to the width of the screen instead
+   of being cropped to fill the full viewport height */
+@media (min-width: 901px) {
+  .hero { height: auto; min-height: 0; }
+  .hero__parallax { position: static; will-change: auto; }
+  .hero__frame { position: static; }
+  .hero__frame video, .hero__frame img {
+    position: static;
+    width: 100%;
+    height: auto;
+    object-fit: initial;
+  }
+}
 .hero__scrim {
   position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(10,9,6,.5) 0%, rgba(10,9,6,.05) 30%, rgba(10,9,6,.15) 55%, rgba(10,9,6,.82) 100%);
@@ -307,8 +321,6 @@ body > .grain { position: fixed; z-index: 90; opacity: 0.035; }
   transform: scale(1.02);
   transition: transform 1.4s var(--ease);
 }
-.frame:hover img { transform: scale(1.1); }
-
 .frame::before {
   content: "";
   position: absolute;
@@ -321,8 +333,6 @@ body > .grain { position: fixed; z-index: 90; opacity: 0.035; }
   mix-blend-mode: overlay;
   z-index: 1;
 }
-.frame:hover::before { transform: rotate(8deg) translateX(340%); }
-
 .frame::after {
   content: "";
   position: absolute; inset: 0;
@@ -330,8 +340,6 @@ body > .grain { position: fixed; z-index: 90; opacity: 0.035; }
   opacity: 0; transition: opacity 0.5s var(--ease);
   z-index: 2;
 }
-.frame:hover::after { opacity: 1; }
-
 .frame__no {
   position: absolute; left: 14px; bottom: 14px;
   font-family: var(--serif); font-style: italic;
@@ -341,7 +349,15 @@ body > .grain { position: fixed; z-index: 90; opacity: 0.035; }
   letter-spacing: 0.02em;
   z-index: 3;
 }
-.frame:hover .frame__no { opacity: 1; transform: translateY(0); }
+
+/* hover-driven effects only for real pointer devices — prevents the
+   sheen / darken / caption from getting "stuck" on touch after a tap */
+@media (hover: hover) and (pointer: fine) {
+  .frame:hover img { transform: scale(1.1); }
+  .frame:hover::before { transform: rotate(8deg) translateX(340%); }
+  .frame:hover::after { opacity: 1; }
+  .frame:hover .frame__no { opacity: 1; transform: translateY(0); }
+}
 
 .cursor-chip {
   position: fixed; top: 0; left: 0;
@@ -390,7 +406,10 @@ body > .grain { position: fixed; z-index: 90; opacity: 0.035; }
 .about__grid { display: grid; grid-template-columns: minmax(260px, 36%) 1fr; gap: clamp(36px, 6vw, 96px); align-items: start; }
 .about__frame { aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper-soft); }
 .about__frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.08) contrast(1.02); transition: transform 9s linear; }
-.about__frame:hover img { transform: scale(1.06); }
+
+@media (hover: hover) and (pointer: fine) {
+  .about__frame:hover img { transform: scale(1.06); }
+}
 
 .about__lead {
   font-family: var(--serif); font-style: italic; font-weight: 400;
