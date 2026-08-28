@@ -41,6 +41,13 @@
     }, { passive: true });
   }
 
+  /* ---------- hero video (respect reduced motion) ---------- */
+  const heroVideo = $(".hero__frame video");
+  if (heroVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    heroVideo.removeAttribute("autoplay");
+    heroVideo.pause();
+  }
+
   /* ---------- mobile menu ---------- */
   const menuBtn = $(".menu-btn");
   const mobileMenu = $(".mobile-menu");
