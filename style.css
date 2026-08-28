@@ -441,19 +441,33 @@ body > .grain { position: fixed; z-index: 90; opacity: 0.035; }
    ========================================================= */
 .showreel { background: var(--ink); color: var(--paper); overflow: hidden; }
 .showreel__frame {
-  aspect-ratio: 16 / 8; border: 1px solid var(--line-light);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+  position: relative;
+  aspect-ratio: 16 / 8;
+  border: 1px solid var(--line-light);
+  overflow: hidden;
+  background: #000;
   margin-bottom: clamp(56px, 9vw, 96px);
 }
+.showreel__video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.showreel__frame.is-playing .showreel__video { object-fit: contain; }
+.showreel__frame.is-playing .showreel__play { opacity: 0; pointer-events: none; }
 .showreel__play {
+  position: absolute; top: 50%; left: 50%; z-index: 2;
+  transform: translate(-50%, -50%);
   width: 78px; height: 78px; border-radius: 50%;
   border: 1px solid rgba(246,241,231,0.45);
+  background: rgba(23,20,15,0.35);
+  color: var(--paper);
   display: flex; align-items: center; justify-content: center;
-  transition: background-color 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+  transition: background-color 0.35s ease, transform 0.35s ease, border-color 0.35s ease, opacity 0.35s ease;
 }
 .showreel__play svg { width: 22px; height: 22px; margin-left: 3px; }
-.showreel__play:hover { background: var(--accent); border-color: var(--accent); transform: scale(1.06); }
-.showreel__frame p { font-size: 11px; text-transform: uppercase; letter-spacing: var(--tracking); opacity: .55; }
+.showreel__play:hover { background: var(--accent); border-color: var(--accent); transform: translate(-50%, -50%) scale(1.06); }
 
 .marquee { overflow: hidden; border-top: 1px solid var(--line-light); padding-top: clamp(24px, 4vw, 40px); }
 .marquee__track { display: flex; width: max-content; gap: clamp(36px, 6vw, 70px); animation: marquee 26s linear infinite; }
