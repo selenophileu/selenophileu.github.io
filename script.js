@@ -25,9 +25,15 @@
     window.addEventListener("scroll", toggleHeader, { passive: true });
   }
 
-  /* ---------- hero parallax ---------- */
+  /* ---------- hero parallax (mobile/tablet only — on desktop the
+     video is sized by width, not cropped, so there's no room to
+     parallax without showing gaps) ---------- */
   const parallaxEl = $("[data-parallax]");
-  if (parallaxEl && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (
+    parallaxEl &&
+    window.matchMedia("(max-width: 900px)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
     let ticking = false;
     const applyParallax = () => {
       const y = window.scrollY;
